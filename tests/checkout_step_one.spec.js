@@ -6,7 +6,7 @@ import customerInfo from '../test_data/customerInfo.json' assert { type: 'json' 
 
 test.describe('checkout', ()=> {
 
-    
+    // test all fields empty
     test('all fields empty', async({ atCheckoutStepOne }) => {
        
         const { page, checkoutStepOne } = atCheckoutStepOne;
