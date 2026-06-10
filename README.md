@@ -63,13 +63,14 @@ npx playwright install
 ```
 
 ## Configuration
-
+ 
+### .env
 Create a `.env` file in the project root storing baseURL and credentials.
 
 
 ## Key Features
 
-### 🔗 Fixture Composition Chain
+###  Fixture Composition Chain
 - **loggedIn** → Sets up authenticated session using `storageState`
 - **productAdded** → Adds 4 products to cart
 - **atCartPage** → Initializes CartPage object
@@ -77,19 +78,19 @@ Create a `.env` file in the project root storing baseURL and credentials.
 - **atCheckoutStepTwo** → Enters customer info & moves to step two
 - **atCheckoutComplete** → Completes order
 
-### 📄 Page Object Model
+###  Page Object Model
 Each page encapsulates:
 - Locators (data-test attributes)
 - User interaction methods
 - Assertion helpers
 
-### 🔐 Session Reuse
+###  Session Reuse
 Authentication happens once in `globalSetup.js`:
 - Logs in via LoginPage
 - Saves cookies & localStorage to `auth/user.json`
 - Tests bypass login using saved state
 
-### 🧪 Test Coverage
+###  Test Coverage
 
 | Feature | Tests | Status |
 |---------|-------|--------|
