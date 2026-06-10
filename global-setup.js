@@ -19,7 +19,7 @@ export default async function globalSetup() {
     await page.waitForURL(`${ENV.baseURL}/inventory.html`);
 
     // save cookies, local storage and session storage to the file
-    await context.storageState({ path: 'auth/user.json' });
+    await page.context().storageState({ path: 'auth/user.json' });
 
     await browser.close();
 
