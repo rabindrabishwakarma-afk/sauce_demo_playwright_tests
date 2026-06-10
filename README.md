@@ -18,11 +18,11 @@ This framework automates the complete purchase workflow including login, product
 # Clone/navigate to project directory
 cd saucedemo-automation
 
-# Install dependencies
-npm install
+# Initialize node package
+npm init -y
 
-# Install Playwright browsers
-npx playwright install
+# Initialize playwright within project
+npm init playwright@latest
 ```
 
 ## Project Structure
@@ -41,7 +41,7 @@ npx playwright install
 │   ├── checkout_step_two.js
 │   └── checkout_complete.js
 ├── fixture/
-│   └── index.js               # Fixture composition with dependency 
+│   └── index.js               # Fixture composition with dependency chain
 │
 ├── test_data/
 │   ├── customerInfo.json
