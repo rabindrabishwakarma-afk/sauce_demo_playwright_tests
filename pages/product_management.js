@@ -48,11 +48,6 @@ export class ProductManagementPage {
         await removeButton.click();
     }
 
-    async getCartCount() {
-        const count = await this.cartBadge.textContent();
-        return Number(count || 0);
-    }
-
     async clickOnCart() {
         await this.cart.click();
     };

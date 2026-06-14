@@ -1,6 +1,8 @@
 import { test, expect } from '../fixture/index.js';
 // import { ENV } from '../config/env.js';
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('product browse', () =>{
 
     test('product browse details page', async ({ loggedIn }) => {
@@ -8,7 +10,7 @@ test.describe('product browse', () =>{
         const { page, productBrowse } = loggedIn;
 
         await productBrowse.productDetail();
-        await expect(page).toHaveURL(`${ENV.baseURL}/inventory-item.html?id=4`);
+        await expect(page).toHaveURL("/inventory-item.html?id=4");
     
         await expect (productBrowse.backToProductBtn).toBeVisible();
         await expect (productBrowse.backToProductBtn).toBeEnabled();
@@ -16,7 +18,7 @@ test.describe('product browse', () =>{
 
         await productBrowse.backToProductPage();
 
-        await expect(page).toHaveURL(`${ENV.baseURL}/inventory.html`);
+        await expect(page).toHaveURL("/inventory.html");
 
     });
 

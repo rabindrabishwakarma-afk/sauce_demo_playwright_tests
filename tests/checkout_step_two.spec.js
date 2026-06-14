@@ -1,6 +1,8 @@
 import { test, expect } from '../fixture/index.js';
 // import { ENV } from '../config/env.js';
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('checkout step two', () => {
 
     test('verify checkout step two page navigation', async ({ atCheckoutStepTwo }) => {

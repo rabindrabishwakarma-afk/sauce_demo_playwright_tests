@@ -4,22 +4,22 @@ import customerInfo from '../test_data/customerInfo.json' assert { type: 'json' 
 
 test('full end to end purchase flow', async ({ loggedIn }) => {
 
-    const { page, productBrowse, productAdd } = loggedIn;
+    const { page, productBrowse, productManagement } = loggedIn;
 
     // sort products
     await productBrowse.sortBy('Price (high to low)');
 
     // add products
-    await productAdd.addProduct('fleeceJacket');
-    await productAdd.addProduct('backpack');
-    await productAdd.addProduct('boltTshirt');
-    await productAdd.addProduct('bikeLight');
+    await productManagement.addProduct('fleeceJacket');
+    await productManagement.addProduct('backpack');
+    await productManagement.addProduct('boltTshirt');
+    await productManagement.addProduct('bikeLight');
 
     // cart badge validation
-    await expect(productAdd.cartBadge).toHaveText('4');
+    await expect(productManagement.cartBadge).toHaveText('4');
 
     // open cart
-    await productAdd.clickOnCart();
+    await productManagement.clickOnCart();
 
     // cart page
     await expect(page).toHaveURL("/cart.html");
@@ -29,21 +29,17 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
     const cartPage = new CartPage(page);
 
     // remove products
-    await cartPage.removeBackpack();
-    await cartPage.removeBikelight();
+    await productManagement.removeProduct('backPack');
+    await productManagement.removeProduct('bikelight');
 
     // checkout
     await cartPage.checkout();
 
     // checkout step one
-    await expect(page)
-        .toHaveURL("/checkout-step-one.html");
+    await expect(page).toHaveURL("/checkout-step-one.html");
 
-    const { CheckoutStepOnePage } =
-        await import('../pages/checkout_step_one.js');
-
-    const checkoutStepOne =
-        new CheckoutStepOnePage(page);
+    const { CheckoutStepOnePage } = await import('../pages/checkout_step_one.js');
+    const checkoutStepOne = new CheckoutStepOnePage(page);
 
     await checkoutStepOne.enterCheckoutInfo(
         customerInfo.firstName,
@@ -54,31 +50,22 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
     await checkoutStepOne.clickContinueBtn();
 
     // checkout step two
-    await expect(page)
-        .toHaveURL("/checkout-step-two.html");
+    await expect(page).toHaveURL("/checkout-step-two.html");
 
-    const { CheckoutStepTwoPage } =
-        await import('../pages/checkout_step_two.js');
-
-    const checkoutStepTwo =
-        new CheckoutStepTwoPage(page);
+    const { CheckoutStepTwoPage } = await import('../pages/checkout_step_two.js');
+    const checkoutStepTwo =new CheckoutStepTwoPage(page);
 
     // finish order
     await checkoutStepTwo.clickFinishBtn();
 
     // complete page
-    await expect(page)
-        .toHaveURL("/checkout-complete.html");
+    await expect(page).toHaveURL("/checkout-complete.html");
 
-    const { CheckoutCompletePage } =
-        await import('../pages/checkout_complete.js');
-
-    const checkoutComplete =
-        new CheckoutCompletePage(page);
+    const { CheckoutCompletePage } = await import('../pages/checkout_complete.js');
+    const checkoutComplete = new CheckoutCompletePage(page);
 
     // thank you validation
-    await expect(checkoutComplete.thankYouMessage)
-        .toBeVisible();
+    await expect(checkoutComplete.thankYouMessage).toBeVisible();
 
     // back home
     await checkoutComplete.clickBackHomeBtn();
@@ -86,11 +73,9 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
     // logout
     await productBrowse.burgerMenuBtn.click();
 
-    await expect(productBrowse.logOutBtn)
-        .toBeVisible();
+    await expect(productBrowse.logOutBtn).toBeVisible();
 
     await productBrowse.logOutBtn.click();
 
-    await expect(page)
-        .toHaveURL("/");
+    await expect(page).toHaveURL("/");
 });

@@ -1,5 +1,7 @@
 import { test, expect } from '../fixture/index.js';
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('product management', () => {
    
     test('add products to cart, remove and verify the cart badge count', async ({ loggedIn }) => {
@@ -30,7 +32,7 @@ test.describe('product management', () => {
         await expect (productManagement.cartBadge).toHaveText('4');
     });
 
-    test('add non-existing product', async ({ loggedIn }) => {
+    test('add non-existing product(negative test)', async ({ loggedIn }) => {
         const { page, productBrowse, productManagement, cart } = loggedIn;
         await productManagement.addProduct('iPhone');
         

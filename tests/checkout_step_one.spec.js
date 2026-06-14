@@ -3,6 +3,8 @@ import { test, expect } from '../fixture/index.js';
 
 import customerInfo from '../test_data/customerInfo.json' assert { type: 'json'   };
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('checkout', ()=> {
 
     // test all fields empty

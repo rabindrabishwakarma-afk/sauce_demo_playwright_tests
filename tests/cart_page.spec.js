@@ -1,6 +1,9 @@
 
 import { test, expect } from '../fixture/index.js';
 // import { ENV } from '../config/env.js';
+
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('cart page tests', () => {
 
     test('verify cart page navigation', async ({ atCartPage }) => {

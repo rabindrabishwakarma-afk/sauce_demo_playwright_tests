@@ -1,6 +1,8 @@
 import { test, expect } from '../fixture/index.js';
 // import { ENV } from '../config/env.js';
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('checkout complete page', () => {
 
     test('verify checkout complete page navigation', async ({ atCheckoutComplete }) => {
@@ -26,9 +28,7 @@ test.describe('checkout complete page', () => {
 
         await expect (checkoutComplete.backHomeBtn).toBeVisible();
         await expect (checkoutComplete.backHomeBtn).toBeEnabled();
-
         await checkoutComplete.clickBackHomeBtn();
-
         await expect(page).toHaveURL("/inventory.html");
     });
 
