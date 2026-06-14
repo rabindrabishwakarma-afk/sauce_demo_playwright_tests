@@ -5,6 +5,7 @@ export class CheckoutCompletePage {
 
         this.title = page.locator('[data-test="title"]');
         this.thankYouMessage = page.locator('[data-test="complete-header"]');
+        this.completeText = page.locator('[data-test="complete-text"]');
         this.backHomeBtn = page.getByRole('button', { name:'Back Home' })
     };
 

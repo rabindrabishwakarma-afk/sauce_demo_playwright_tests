@@ -1,38 +1,64 @@
 
 import { test, expect } from '../fixture/index.js';
-import { ENV } from '../config/env.js';
+// import { ENV } from '../config/env.js';
+test.describe('cart page tests', () => {
 
-test('cart page verification and product remove', async ({atCartPage}) => {
-    const { page, productAdd, cartPage } = atCartPage;
+    test('verify cart page navigation', async ({ atCartPage }) => {
+        const { page, cartPage } = atCartPage;
+        await expect (page).toHaveURL("/cart.html");
+        await expect (cartPage.title).toHaveText('Your Cart');
+    });
 
-    // verify cart page navigation and remove two product and verify the action
-    await expect (cartPage.title).toHaveText('Your Cart');
+    test('verify products in cart', async ({ atCartPage }) => {
+        const { page, cartPage } = atCartPage; 
+        await cartPage.isProductInCart('fleeceJacket');
+        await cartPage.isProductInCart('backpack');
+        await cartPage.isProductInCart('boltTshirt');
+        await cartPage.isProductInCart('bikeLight'); 
+    });
 
-    // remove two products
-    await cartPage.removeBackpack();
-    await cartPage.removeBikelight();
+    test('verify product remove', async ({atCartPage}) => {
+        const { page, productManagement, cartPage } = atCartPage;
 
-    // verify the product deletion
-    await expect (cartPage.sauceLabsBackpack).toHaveCount(0);
-    await expect (cartPage.sauceLabsBikeLight).toHaveCount(0);
+        // remove two products
+        await productManagement.removeProduct('backPack');
+        await productManagement.removeProduct('bikelight');
 
-    // verify cart has two product
-    await expect (cartPage.sauceLabsFleeceJacket).toHaveCount(1);
-    await expect (cartPage.sauceLabsBoltTshirt).toHaveCount(1);
+        // verify the product deletion
+        await expect (cartPage.productsInCart.backpack).toHaveCount(0);
+        await expect (cartPage.productsInCart.bikeLight).toHaveCount(0);
 
-    await expect (productAdd.cartBadge).toHaveText('2');
+        // verify cart has two product
+        await cartPage.isProductInCart('fleeceJacket');
+        await cartPage.isProductInCart('boltTshirt');
 
-    // verify 'Continue Shopping' button functionality
-    await expect (cartPage.continueShoppingBtn).toBeVisible();
-    await expect (cartPage.continueShoppingBtn).toBeEnabled();
+        await expect (productManagement.cartBadge).toHaveText('2');
 
-    await cartPage.continueShopping();
-    await expect (page).toHaveURL(`${ENV.baseURL}/inventory.html`);
+    });
 
-    await productAdd.clickOnCart();
+    test('verify remove non-existing product(negative test)', async ({ atCartPage }) => {
+        const { page,productManagement, cartPage } = atCartPage;
 
-    await cartPage.checkout();
-    await expect (page).toHaveURL(`${ENV.baseURL}/checkout-step-one.html`);
+        await productManagement.removeProduct('iPhone');
+        await productManagement.removeProduct('laptop');
+    });
+
+        
+    test('verify continue shopping button functionality', async ({ atCartPage }) => {
+        const { page, cartPage } = atCartPage;
+
+        await expect (cartPage.continueShoppingBtn).toBeVisible();
+        await expect (cartPage.continueShoppingBtn).toBeEnabled();
+        await cartPage.continueShopping();
+        await expect (page).toHaveURL("/inventory.html");
+    });
+
+    test('verify checkout button functionality', async ({ atCartPage }) => {
+        const { page, cartPage } = atCartPage;
+
+        await cartPage.checkout();
+        await expect (page).toHaveURL("/checkout-step-one.html");
+    });
     
 
 });

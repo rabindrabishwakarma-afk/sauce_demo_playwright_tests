@@ -1,5 +1,5 @@
 import { test, expect } from '../fixture/index.js';
-import { ENV } from '../config/env.js';
+// import { ENV } from '../config/env.js';
 
 test.describe('product browse', () =>{
 
@@ -20,7 +20,53 @@ test.describe('product browse', () =>{
 
     });
 
-    test('sort products', async ({ loggedIn }) => {
+    test('default sort order is Name (A to Z)', async ({ loggedIn }) => {
+
+        const { page, productBrowse } = loggedIn;
+        
+        await expect (productBrowse.productSort).toHaveValue('az');
+
+        const names = await productBrowse.getAllNames();
+        const sortedNames = [...names].sort((a, b) => a.localeCompare(b));
+
+        await expect (names).toEqual(sortedNames);
+
+        const expectedFirstProduct = sortedNames[0];
+        await expect (names[0]).toBe(expectedFirstProduct);
+    });
+
+    test('sort products by name (Z to A)', async ({ loggedIn }) => {
+
+        const { page, productBrowse } = loggedIn;
+        
+        await productBrowse.sortBy('Name (Z to A)');
+
+        const names = await productBrowse.getAllNames();
+        const sortedNames = [...names].sort((a, b) => b.localeCompare(a));
+
+        await expect (names).toEqual(sortedNames);
+
+        const expectedFirstProduct = sortedNames[0];
+        await expect (names[0]).toBe(expectedFirstProduct);
+    });
+
+
+    test('sort products by price (low to high)', async ({ loggedIn }) => {
+
+        const { page, productBrowse } = loggedIn;
+        
+        await productBrowse.sortBy('Price (low to high)');
+
+        const prices = await productBrowse.getAllPrices();
+        const sortedPrices = [...prices].sort((a, b) => a - b);
+
+        await expect (prices).toEqual(sortedPrices);
+
+        const minPrice = Math.min(...prices);
+        await expect (prices[0]).toBe(minPrice);
+    });
+
+    test('sort products by price (high to low)', async ({ loggedIn }) => {
 
         const { page, productBrowse } = loggedIn;
         

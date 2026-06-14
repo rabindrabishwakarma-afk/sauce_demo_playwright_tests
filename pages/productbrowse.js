@@ -11,6 +11,7 @@ export class ProductBrowsePage {
         this.backPackImg = page.locator('[data-test="item-sauce-labs-backpack-img"]');
         this.productSort = page.getByRole('combobox');
         this.allPrices = page.locator('[data-test="inventory-item-price"]');
+        this.allNames = page.locator('[data-test="inventory-item-name"]');
 
         this.burgerMenuBtn = page.getByRole('button', {name: 'Open Menu'});
         this.logOutBtn = page.getByRole('link', {name: 'Logout'});
@@ -31,7 +32,11 @@ export class ProductBrowsePage {
         await this.productSort.selectOption(value);
     };
 
-    
+    async getAllNames() {
+        const nameTexts = await this.allNames.allTextContents();
+        return nameTexts;
+    }
+
     async getAllPrices() {
         const priceTexts = await this.allPrices.allTextContents();
         return priceTexts.map(p => parseFloat(p.replace('$', '')));

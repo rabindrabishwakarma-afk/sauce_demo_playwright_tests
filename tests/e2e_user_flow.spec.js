@@ -22,7 +22,7 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
     await productAdd.clickOnCart();
 
     // cart page
-    await expect(page).toHaveURL(`${ENV.baseURL}/cart.html`);
+    await expect(page).toHaveURL("/cart.html");
 
     // initialize cart page
     const { CartPage } = await import('../pages/cartpage.js');
@@ -37,7 +37,7 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
 
     // checkout step one
     await expect(page)
-        .toHaveURL(`${ENV.baseURL}/checkout-step-one.html`);
+        .toHaveURL("/checkout-step-one.html");
 
     const { CheckoutStepOnePage } =
         await import('../pages/checkout_step_one.js');
@@ -55,7 +55,7 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
 
     // checkout step two
     await expect(page)
-        .toHaveURL(`${ENV.baseURL}/checkout-step-two.html`);
+        .toHaveURL("/checkout-step-two.html");
 
     const { CheckoutStepTwoPage } =
         await import('../pages/checkout_step_two.js');
@@ -68,7 +68,7 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
 
     // complete page
     await expect(page)
-        .toHaveURL(`${ENV.baseURL}/checkout-complete.html`);
+        .toHaveURL("/checkout-complete.html");
 
     const { CheckoutCompletePage } =
         await import('../pages/checkout_complete.js');
@@ -92,5 +92,5 @@ test('full end to end purchase flow', async ({ loggedIn }) => {
     await productBrowse.logOutBtn.click();
 
     await expect(page)
-        .toHaveURL(`${ENV.baseURL}/`);
+        .toHaveURL("/");
 });

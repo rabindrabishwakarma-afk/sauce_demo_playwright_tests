@@ -1,4 +1,4 @@
-import { ENV } from '../config/env.js';
+// import { ENV } from '../config/env.js';
 export class LoginPage {
 
     constructor(page) {
@@ -14,7 +14,7 @@ export class LoginPage {
     };
 
     async visitPage() {
-        await this.page.goto(ENV.baseURL);
+        await this.page.goto('/');
     };
 
     async login(username, password) {

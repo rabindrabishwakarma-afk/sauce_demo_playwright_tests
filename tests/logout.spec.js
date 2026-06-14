@@ -1,7 +1,7 @@
 import { test, expect } from '../fixture/index.js';
-import { ENV } from '../config/env.js';
+// import { ENV } from '../config/env.js';
 
-test('verify the thank you message display and logout', async ({ loggedIn })=> {
+test('verify logout functionality', async ({ loggedIn })=> {
     const { page, productBrowse } = loggedIn;
 
     await productBrowse.burgerMenuBtn.click();
@@ -10,5 +10,5 @@ test('verify the thank you message display and logout', async ({ loggedIn })=> {
     await expect (productBrowse.logOutBtn).toBeEnabled();
 
     await productBrowse.logOutBtn.click();
-    await expect (page).toHaveURL(`${ENV.baseURL}/`);
+    await expect (page).toHaveURL("/");
 });

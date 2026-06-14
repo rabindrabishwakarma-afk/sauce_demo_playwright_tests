@@ -1,6 +1,5 @@
 import { test, expect } from '../fixture/index.js';
-import { ENV } from '../config/env.js';
-
+// import { ENV } from '../config/env.js';
 
 import customerInfo from '../test_data/customerInfo.json' assert { type: 'json'   };
 
@@ -44,7 +43,7 @@ test.describe('checkout', ()=> {
         const { page, checkoutStepOne } = atCheckoutStepOne;
         await checkoutStepOne.enterCheckoutInfo(customerInfo.firstName, customerInfo.lastName, customerInfo.postalCode);
         await checkoutStepOne.clickCancelBtn();
-        await expect (page).toHaveURL(`${ENV.baseURL}/cart.html`);
+        await expect (page).toHaveURL("/cart.html");
 
     });
 
@@ -52,7 +51,7 @@ test.describe('checkout', ()=> {
         const { page, checkoutStepOne } = atCheckoutStepOne;
         await checkoutStepOne.enterCheckoutInfo(customerInfo.firstName, customerInfo.lastName, customerInfo.postalCode);
         await checkoutStepOne.clickContinueBtn();
-        await expect (page).toHaveURL(`${ENV.baseURL}/checkout-step-two.html`);
+        await expect (page).toHaveURL("/checkout-step-two.html");
         
     });
 
