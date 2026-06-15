@@ -35,7 +35,7 @@ npm init playwright@latest
 ├── pages/                     # Page Object Model classes
 │   ├── loginpage.js
 │   ├── productbrowse.js
-│   ├── product_add.js
+│   ├── product_management.js
 │   ├── cartpage.js
 │   ├── checkout_step_one.js
 │   ├── checkout_step_two.js
@@ -50,7 +50,7 @@ npm init playwright@latest
 ├── tests/
 │   ├── login.spec.js
 │   ├── product_browse.spec.js
-│   ├── product_add.spec.js
+│   ├── product_management.spec.js
 │   ├── cart.spec.js
 │   ├── checkout_step_one.spec.js
 │   ├── checkout_step_two.spec.js
