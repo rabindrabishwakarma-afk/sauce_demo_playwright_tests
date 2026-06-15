@@ -24,7 +24,7 @@ const test = base.extend({
         // await Login.login(ENV.username, ENV.password);
 
         // use the storage state from global setup to bypass login
-        await page.goto(`${ENV.baseURL}/inventory.html`);
+        await page.goto("/inventory.html");
 
         // confirms session is valid before any test body runs
         await expect(page).toHaveURL("/inventory.html");

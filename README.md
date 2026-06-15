@@ -95,12 +95,12 @@ Authentication happens once in `globalSetup.js`:
 | Feature | Tests | Status |
 |---------|-------|--------|
 | Login | 7 tests | ✅ |
-| Product Browse | 2 tests | ✅ |
-| Product Add | 1 test | ✅ |
-| Cart Management | 1 test | ✅ |
-| Checkout Step 1 | 5 tests | ✅ |
-| Checkout Step 2 | 1 test | ✅ |
-| Checkout Complete | 1 test | ✅ |
+| Product Browse | 5 tests | ✅ |
+| Product Management | 3 test | ✅ |
+| Cart Management | 6 test | ✅ |
+| Checkout Step 1 | 6 tests | ✅ |
+| Checkout Step 2 | 6 test | ✅ |
+| Checkout Complete | 3 test | ✅ |
 | Logout | 1 test | ✅ |
 | End-to-End | 1 test | ✅ |
 
@@ -146,6 +146,64 @@ npm test -- --project=chromium
    - Tests load saved authentication state
    - Navigates directly to inventory page
    - Skips login process entirely
+
+## Test Cases
+
+### login.spec.js
+    1. Login with both field empty
+    2. Login with empty username field
+    3. Login with empty password field
+    4. Login wtih invalid username
+    5. Login with invalid password
+    6. Login with locked out user credentials
+    7. Login with valid credentials
+
+### prodcut_browse.spec.js
+    1. Navigation to product detail page
+    2. Default sort order is Name (A to Z)
+    3. Sort products by Name (Z to A)
+    4. Sort products by Price (low to high)
+    5. Sort products by Price (high to low)
+
+### product_management.spec.js
+    1. Add products to cart, remove and verify the cart badge count
+    2. Add non-existing product(negative test)
+    3. Remove non-existing product(negative test)
+
+### cart_page.spec.js
+    1. Cart page navigation
+    2. Products in cart
+    3. Product remove
+    4. Remove non-existing product(negative test)
+    5. Continue shopping button functionality
+    6. Checkout button functionality
+
+### checkout_step_one.spec.js
+    1. Checkout with all fields empty in customer info
+    2. Checkout with empty first name in customer info
+    3. Checkout with empty last name in customer info
+    4. Checkout with empty postal code in customer info
+    5. Cancel button functionality
+    6. Continue button functionality
+
+### checkout_step_two.spec.js
+    1. Checkout step two page navigation
+    2. Final products in the cart
+    3. Checkout information on checkout step two page
+    4. Total and subtotal amount calculation
+    5. Cancel button functionality
+    6. Finish button functionality
+    
+### checkout_complete.spec.js
+    1. Checkout complete page navigation
+    2. Thank you message display
+    3. Back Home button functionality
+
+### logout.spec.js
+    1. Logout functionality
+
+### e2e_user_flow.spec.js
+    complete user flow from login to logout
 
 
 ## Best Practices Implemented

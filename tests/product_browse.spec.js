@@ -5,7 +5,7 @@ test.describe.configure({ mode: 'parallel' });
 
 test.describe('product browse', () =>{
 
-    test('product browse details page', async ({ loggedIn }) => {
+    test('navigation to product detail page', async ({ loggedIn }) => {
 
         const { page, productBrowse } = loggedIn;
 

@@ -27,7 +27,7 @@ test.describe('checkout step two', () => {
         await expect(checkoutStepTwo.getCheckoutInfo('priceInfo')).toBeVisible();
     });
 
-    test('verify the total and subtotal and continue', async({ atCheckoutStepTwo }) => {
+    test('verify total and subtotal amount calculation', async({ atCheckoutStepTwo }) => {
         const { page, checkoutStepTwo } = atCheckoutStepTwo;
         
         const fleeceJacketPrice = await checkoutStepTwo.getProductPrice(0);

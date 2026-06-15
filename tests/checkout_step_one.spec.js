@@ -5,10 +5,10 @@ import customerInfo from '../test_data/customerInfo.json' assert { type: 'json' 
 
 test.describe.configure({ mode: 'parallel' });
 
-test.describe('checkout', ()=> {
+test.describe('checkout step one page tests', ()=> {
 
     // test all fields empty
-    test('all fields empty', async({ atCheckoutStepOne }) => {
+    test('checkout with all fields empty in customer info', async({ atCheckoutStepOne }) => {
        
         const { page, checkoutStepOne } = atCheckoutStepOne;
         await checkoutStepOne.enterCheckoutInfo('','','');
@@ -17,7 +17,7 @@ test.describe('checkout', ()=> {
         await expect(error).toBe('Error: First Name is required');
     });
 
-    test('empty first name', async({ atCheckoutStepOne }) => {
+    test('checkout with empty first name in customer info', async({ atCheckoutStepOne }) => {
         const { page, checkoutStepOne } = atCheckoutStepOne;
         await checkoutStepOne.enterCheckoutInfo('', customerInfo.lastName, customerInfo.postalCode);
         await checkoutStepOne.clickContinueBtn();
@@ -25,7 +25,7 @@ test.describe('checkout', ()=> {
         await expect(error).toBe('Error: First Name is required');
     });
 
-    test('empty last name', async({ atCheckoutStepOne }) => {
+    test('checkout with empty last name in customer info', async({ atCheckoutStepOne }) => {
         const { page, checkoutStepOne } = atCheckoutStepOne;
         await checkoutStepOne.enterCheckoutInfo(customerInfo.firstName, '', customerInfo.postalCode);
         await checkoutStepOne.clickContinueBtn();
@@ -33,7 +33,7 @@ test.describe('checkout', ()=> {
         await expect(error).toBe('Error: Last Name is required');
     });
 
-    test('empty  postal code', async({ atCheckoutStepOne }) => {
+    test('checkout with empty postal code in customer info', async({ atCheckoutStepOne }) => {
         const { page, checkoutStepOne } = atCheckoutStepOne;
         await checkoutStepOne.enterCheckoutInfo(customerInfo.firstName, customerInfo.lastName, '');
         await checkoutStepOne.clickContinueBtn();

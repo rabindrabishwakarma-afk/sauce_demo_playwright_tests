@@ -19,43 +19,43 @@ test.describe('Login Test', async() =>{
     await expect(page).toHaveURL("/");
   });
 
-  test('both field empty', async() => {
+  test('login with both fields empty', async() => {
     await Login.login('', '');
     const error = await Login.getErrorMessage();
     await expect (error).toBe('Epic sadface: Username is required');
   });
 
-  test('empty username field', async () => {
+  test('login with empty username field', async () => {
     await Login.login('', loginData.validUser.password);
     const error = await Login.getErrorMessage();
     await expect(error).toBe('Epic sadface: Username is required');
   });
 
-  test('empty password field', async () => {
+  test('login with empty password field', async () => {
     await Login.login(loginData.validUser.username, '');
     const error = await Login.getErrorMessage();
     await expect(error).toBe('Epic sadface: Password is required');
   });
 
-  test('invalid username', async () => {
+  test('login with invalid username', async () => {
     await Login.login(loginData.invalidUser.username, loginData.validUser.password);
     const error = await Login.getErrorMessage();
     await expect(error).toBe('Epic sadface: Username and password do not match any user in this service');
   });
 
-  test('invalid password', async () => {
+  test('login with invalid password', async () => {
     await Login.login(loginData.validUser.username, loginData.invalidUser.password);
     const error = await Login.getErrorMessage();
     await expect(error).toBe('Epic sadface: Username and password do not match any user in this service');
   });
 
-  test('locked out user', async () => {
+  test('login with locked out user credential', async () => {
     await Login.login(loginData.lockedoutUser.username, loginData.lockedoutUser.password);
     const error = await Login.getErrorMessage();
     await expect(error).toBe('Epic sadface: Sorry, this user has been locked out.');
   });
 
-  test('valid credentials', async ({ page }) => {
+  test('login with valid credentials', async ({ page }) => {
     await Login.login(loginData.validUser.username, loginData.validUser.password);
     await expect(page).toHaveURL("/inventory.html");
     console.log('User is logged into the sauce demo website.');
