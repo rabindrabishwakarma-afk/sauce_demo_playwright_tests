@@ -56,7 +56,7 @@ npm init playwright@latest
 │   ├── checkout_step_two.spec.js
 │   ├── checkout_complete.spec.js
 │   ├── logout.spec.js
-│   └── e2e.spec.js
+│   └── e2e.user_flow.spec.js
 ├── playwright.config.js       # Playwright configuration
 ├── globalSetup.js             # Authentication setup hook
 └── .env                       # Environment variables
